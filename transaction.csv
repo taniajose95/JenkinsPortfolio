@@ -1,0 +1,5 @@
+user_id,amount,transaction_type
+1,5000,deposit
+2,15000,transfer
+3,25000,withdrawal
+4,8000,deposit
