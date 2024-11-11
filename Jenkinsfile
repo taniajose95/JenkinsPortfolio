@@ -29,11 +29,16 @@ pipeline {
         stage('Install kubectl') {
             steps {
                 script {
-                    // Install kubectl
+                    // Install kubectl to a directory with write permissions
                     sh '''
                         curl -LO "https://dl.k8s.io/release/v1.26.0/bin/linux/amd64/kubectl"
                         chmod +x ./kubectl
-                        mv ./kubectl /usr/local/bin/kubectl
+                        mv ./kubectl /home/jenkins/kubectl
+                    '''
+                    // Add kubectl to PATH
+                    sh '''
+                        echo "export PATH=\$PATH:/home/jenkins" >> ~/.bashrc
+                        source ~/.bashrc
                     '''
                 }
             }
@@ -44,7 +49,7 @@ pipeline {
                     // Update image tag in deployment YAML
                     sh 'sed -i "s/IMAGE_TAG/${IMAGE_TAG}/g" k8s/deploy.yaml'
                     // Apply the deployment to Kubernetes
-                    sh 'kubectl apply -f k8s/deploy.yaml'
+                    sh '/home/jenkins/kubectl apply -f k8s/deploy.yaml'
                 }
             }
         }
