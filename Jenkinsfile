@@ -7,7 +7,7 @@ pipeline{
 	stages{
 		stage('Checkout'){
 			steps(
-				git 'https://github.com/taniajose95/transaction_check.git'
+				git 'https://github.com/taniajose95/JenkinsPortfolio.git'
 		)
 		}
 		stage('Build Docker Image'){
@@ -21,7 +21,7 @@ pipeline{
 		stage('Push Docker Image'){
 			steps{
 				script{
-				docker.withRegistry('', 'dockerhub-credentials')
+				docker.withRegistry('', 'e132848b-4ec1-49e5-89e7-73329b4c2d56')
 				{
 				docker.image("${IMAGE_NAME}:${IMAGE_TAG}").push()	
 				}
