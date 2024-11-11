@@ -13,8 +13,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Force Docker to ignore cache for this build
-                    docker.build("${IMAGE_NAME}:${IMAGE_TAG}", "--no-cache")
+                    // Specify context path with `.` to point to the current directory
+                    docker.build("${IMAGE_NAME}:${IMAGE_TAG}", "--no-cache .")
                 }
             }
         }
@@ -29,14 +29,12 @@ pipeline {
         }
         stage('Verify kubectl Path') {
             steps {
-                // Check if kubectl is accessible at the expected path
                 sh 'ls -l /usr/local/bin/kubectl'
             }
         }
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    // Update image tag in deployment YAML and apply the deployment
                     sh 'sed -i "s/IMAGE_TAG/${IMAGE_TAG}/g" k8s/deploy.yaml'
                     sh '/usr/local/bin/kubectl apply -f k8s/deploy.yaml'
                 }
