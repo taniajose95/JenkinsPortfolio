@@ -32,7 +32,7 @@ pipeline {
                     // Update image tag in deployment YAML
                     sh 'sed -i "s/IMAGE_TAG/${IMAGE_TAG}/g" k8s/deploy.yaml'
                     // Apply the deployment to Kubernetes
-                    sh '/home/jenkins/kubectl apply -f k8s/deploy.yaml'
+                    sh '/usr/local/bin/kubectl apply -f k8s/deploy.yaml'
                 }
             }
         }
