@@ -33,11 +33,11 @@ pipeline {
                     sh '''
                         curl -LO "https://dl.k8s.io/release/v1.26.0/bin/linux/amd64/kubectl"
                         chmod +x ./kubectl
-                        mv ./kubectl /home/jenkins/kubectl
+                        mv ./kubectl /home/tania/myjenkins/kubectl
                     '''
                     // Add kubectl to PATH
                     sh '''
-                        echo "export PATH=\$PATH:/home/jenkins" >> ~/.bashrc
+                        echo "export PATH=\$PATH:/home/tania/myjenkins" >> ~/.bashrc
                         source ~/.bashrc
                     '''
                 }
