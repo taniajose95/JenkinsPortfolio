@@ -6,9 +6,9 @@ pipeline{
 	}
 	stages{
 		stage('Checkout'){
-			steps(
+			steps{
 				git 'https://github.com/taniajose95/JenkinsPortfolio.git'
-		)
+	}
 		}
 		stage('Build Docker Image'){
 			steps{
