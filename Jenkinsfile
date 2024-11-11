@@ -7,7 +7,9 @@ pipeline{
 	stages{
 		stage('Checkout'){
 			steps{
-				git 'https://github.com/taniajose95/JenkinsPortfolio.git'
+				git 'https://github.com/taniajose95/JenkinsPortfolio.git',
+               branch: 'main',
+                credentialsId: 'github_cred'
 	}
 		}
 		stage('Build Docker Image'){
